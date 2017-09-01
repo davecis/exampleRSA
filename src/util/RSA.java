@@ -9,7 +9,7 @@ public class RSA {
 
     int tamPrimo;
     BigInteger n, q, p;
-    BigInteger totient;
+    BigInteger fi;
     BigInteger e, d;
 
    
@@ -30,13 +30,13 @@ public class RSA {
         n = p.multiply(q);
         
         
-        totient = p.subtract(BigInteger.valueOf(1));
-        totient = totient.multiply(q.subtract(BigInteger.valueOf(1)));
+        fi = p.subtract(BigInteger.valueOf(1));
+        fi = fi.multiply(q.subtract(BigInteger.valueOf(1)));
         
         do e = new BigInteger(2 * tamPrimo, new Random());
-            while((e.compareTo(totient) != -1) || (e.gcd(totient).compareTo(BigInteger.valueOf(1)) != 0));
+            while((e.compareTo(fi) != -1) || (e.gcd(fi).compareTo(BigInteger.valueOf(1)) != 0));
         
-        d = e.modInverse(totient);
+        d = e.modInverse(fi);
     }
     
     
@@ -75,10 +75,10 @@ public class RSA {
         return(new String(charArray));
     }
     
-    public BigInteger damep() {return(p);}
-    public BigInteger dameq() {return(q);}
-    public BigInteger dametotient() {return(totient);}
-    public BigInteger damen() {return(n);}
-    public BigInteger damee() {return(e);}
-    public BigInteger damed() {return(d);}
+    public BigInteger getp() {return(p);}
+    public BigInteger getq() {return(q);}
+    public BigInteger getfit() {return(fi);}
+    public BigInteger getn() {return(n);}
+    public BigInteger gete() {return(e);}
+    public BigInteger getd() {return(d);}
 }

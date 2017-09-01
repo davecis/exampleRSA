@@ -176,10 +176,10 @@ public class NewJFrame extends javax.swing.JFrame {
             rsa = new RSA(Integer.parseInt(jTextField1.getText()));
             rsa.generaPrimos();
             rsa.generaClaves();
-            jTextField2.setText("p:["+rsa.damep()+"]");
-            jTextField3.setText("q:["+rsa.dameq()+"]");
-            jTextField4.setText("Clave privada (n,e):["+rsa.damen()+"] ["+rsa.damee()+"]");
-            jTextField5.setText("Clave publica (n,d):["+rsa.damen()+"] ["+rsa.damed()+"]");
+            jTextField2.setText("p:["+rsa.getp()+"]");
+            jTextField3.setText("q:["+rsa.getq()+"]");
+            jTextField4.setText("Clave privada (n,e):["+rsa.getn()+"] ["+rsa.gete()+"]");
+            jTextField5.setText("Clave publica (n,d):["+rsa.getn()+"] ["+rsa.getd()+"]");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
