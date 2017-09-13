@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="Auscul-TTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entity.Tauscultacion</class>
+    <class>entity.TauscultacionParticipante</class>
+    <class>entity.Causcultacion</class>
+    <class>entity.Cestado</class>
+    <class>entity.CusuarioRol</class>
+    <class>entity.Tusuario</class>
+    <class>entity.Tusuariorol</class>
+    <class>entity.Tvotos</class>
+    <class>entity.Topciones</class>
+    <class>entity.Tsysuser</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@25.1.193.23:1521:PDBORCL"/>
+      <property name="javax.persistence.jdbc.user" value="AUSCULT"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="TrabAjot3rm1nal#1 "/>
+    </properties>
+  </persistence-unit>
+</persistence>

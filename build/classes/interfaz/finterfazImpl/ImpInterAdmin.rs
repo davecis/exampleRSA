@@ -1,0 +1,2 @@
+interfaz.finterfazimpl.ImpInterAdmin
+ImpInterAdmin
