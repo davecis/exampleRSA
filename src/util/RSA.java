@@ -10,6 +10,9 @@ public class RSA {
     int tamPrimo;
     BigInteger n, q, p;
     BigInteger fi;
+    BigInteger k, in, ta;
+    //n y d llave publica 
+    //n y e llave privada
     BigInteger e, d;
 
    
@@ -39,6 +42,15 @@ public class RSA {
         d = e.modInverse(fi);
     }
     
+    public void factorOpacidad(){
+        do k = new BigInteger(tamPrimo, new Random());
+            while(k.gcd(n).compareTo(BigInteger.valueOf(1)) != 0);
+        System.err.println("factor de enmascaramiento: " + k);
+        in = k.modInverse(n);
+        System.err.println("Inverso de factor: " + in);
+       
+    }
+    
     
     public BigInteger[] cifrar(String mensaje)
     {
@@ -58,6 +70,38 @@ public class RSA {
             cifrado[i] = bigdigitos[i].modPow(e,n);
         
         return(cifrado);
+    }
+    
+    public BigInteger[] firma(BigInteger[] firma)
+    {
+        int i;
+        BigInteger[] cifrado = new BigInteger[firma.length];
+        for(i=0;i<firma.length; i++)
+            cifrado[i] = firma[i].modPow(d,n);
+        
+        BigInteger[] s = new BigInteger[cifrado.length];
+        
+        for(i=0;i<cifrado.length; i++)
+            s[i] = (cifrado[i].multiply(in)).mod(n);
+        return(s);
+    }
+    
+    public BigInteger[] firmaCiega (String mensaje){
+        int i;
+        byte[] temp = new byte[1];
+        byte[] digitos = mensaje.getBytes();
+        BigInteger[] bigdigitos = new BigInteger[digitos.length];
+        
+        for(i=0; i<bigdigitos.length;i++){
+            temp[0] = digitos[i];
+            bigdigitos[i] = new BigInteger(temp);
+        }
+        BigInteger[] firma = new BigInteger[bigdigitos.length];
+        
+        for(i=0; i<bigdigitos.length; i++)
+            firma[i] = (bigdigitos[i].multiply(k)).modPow(e,n);
+        
+        return firma;
     }
     
     

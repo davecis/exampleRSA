@@ -17,7 +17,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private RSA rsa;  
     private BigInteger[] textoCifrado;
-    
+    private BigInteger[] textoFirmado;
+    private BigInteger[] firma;
     
     public NewJFrame() {
         initComponents();
@@ -180,6 +181,7 @@ public class NewJFrame extends javax.swing.JFrame {
             jTextField3.setText("q:["+rsa.getq()+"]");
             jTextField4.setText("Clave privada (n,e):["+rsa.getn()+"] ["+rsa.gete()+"]");
             jTextField5.setText("Clave publica (n,d):["+rsa.getn()+"] ["+rsa.getd()+"]");
+            rsa.factorOpacidad();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -189,9 +191,18 @@ public class NewJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"No haz introducido datos para cifrar", "Tenemos problemas", JOptionPane.ERROR_MESSAGE);
         else {
             textoCifrado = rsa.cifrar(jTextArea1.getText());
-            jTextArea2.setText("");
+            textoFirmado = rsa.firmaCiega(jTextArea1.getText());
+            jTextArea1.setText("");
             for(int i=0; i<textoCifrado.length; i++)
-                jTextArea2.append(textoCifrado[i].toString());
+                jTextArea1.append(textoCifrado[i].toString());
+            
+            jTextArea1.append("\n");
+            jTextArea1.append("Firma Ciega");
+            jTextArea1.append("\n");
+            
+            for(int i=0; i<textoCifrado.length; i++)
+                jTextArea1.append(textoFirmado[i].toString());
+            
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -202,6 +213,14 @@ public class NewJFrame extends javax.swing.JFrame {
             jTextArea2.setText("");
             String recuperarTextoPlano = rsa.descifrar(textoCifrado);
             jTextArea2.setText(recuperarTextoPlano);
+            
+            jTextArea2.append("\n");
+            jTextArea2.append("Validacion de Firma Ciega");
+            jTextArea2.append("\n");
+            
+            firma = rsa.firma(textoFirmado);
+            for(int i=0; i<firma.length; i++)
+                jTextArea2.append(firma[i].toString());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
